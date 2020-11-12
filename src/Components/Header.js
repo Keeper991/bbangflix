@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyleHeader = styled.header`
   color: white;
@@ -23,24 +24,30 @@ const StyleList = styled.ul`
 
 const Item = styled.li`
   width: 80px;
-  /* height: 50px; */
 
   &::not(:last-child) {
     margin-right: 50px;
   }
 `;
 
+const StyleLink = styled(Link)`
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Header = () => (
   <StyleHeader>
     <StyleList>
       <Item>
-        <a href="/">Movies</a>
+        <StyleLink to="/">Movies</StyleLink>
       </Item>
       <Item>
-        <a href="/tv">TV</a>
+        <StyleLink to="/tv">TV</StyleLink>
       </Item>
       <Item>
-        <a href="/search">Search</a>
+        <StyleLink to="/search">Search</StyleLink>
       </Item>
     </StyleList>
   </StyleHeader>
