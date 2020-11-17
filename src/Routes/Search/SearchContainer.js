@@ -6,14 +6,10 @@ class SearchContainer extends React.Component {
   state = {
     movieResults: null,
     tvResults: null,
-    searchTerm: "code",
+    searchTerm: "",
     loading: true,
     error: null,
   };
-
-  componentDidMount() {
-    this.handleSubmit();
-  }
 
   handleSubmit = () => {
     const { searchTerm } = this.state;
