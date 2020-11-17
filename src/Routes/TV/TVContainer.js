@@ -28,7 +28,6 @@ class TVContainer extends React.Component {
         popular,
         airingToday,
       });
-      console.log(topRated, popular, airingToday);
     } catch {
       this.setState({ error: "Can not find TV information." });
     } finally {
