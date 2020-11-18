@@ -1,4 +1,5 @@
 import Loader from "Components/Loader";
+import Message from "Components/Message";
 import Section from "Components/Section";
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -22,6 +23,7 @@ const SearchPresenter = ({
   movieResults,
   tvResults,
   searchTerm,
+  notFound,
   loading,
   error,
   handleSubmit,
@@ -53,6 +55,8 @@ const SearchPresenter = ({
             ))}
           </Section>
         )}
+        {error && <Message color="#e74c3c" text={error} />}
+        {notFound && <Message color="#95a5a6" text="Not Found" />}
       </>
     )}
   </Container>
@@ -62,6 +66,7 @@ SearchPresenter.propTypes = {
   movieResults: PropTypes.array,
   tvResults: PropTypes.array,
   searchTerm: PropTypes.string,
+  notFound: PropTypes.bool,
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,

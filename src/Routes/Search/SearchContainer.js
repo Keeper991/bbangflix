@@ -8,6 +8,7 @@ class SearchContainer extends React.Component {
     tvResults: null,
     searchTerm: "",
     loading: false,
+    notFound: false,
     error: null,
   };
 
@@ -28,6 +29,7 @@ class SearchContainer extends React.Component {
 
   searchByTerm = async (searchTerm) => {
     this.setState({ loading: true });
+    this.setState({ notFound: false });
     try {
       const {
         data: { results: movieResults },
@@ -36,6 +38,13 @@ class SearchContainer extends React.Component {
         data: { results: tvResults },
       } = await tvApi.search(searchTerm);
       this.setState({ movieResults, tvResults });
+      if (
+        movieResults &&
+        tvResults &&
+        movieResults.length === 0 &&
+        tvResults.length === 0
+      )
+        this.setState({ notFound: true });
     } catch (error) {
       this.setState({ error: "Can not find results." });
     } finally {
@@ -44,12 +53,20 @@ class SearchContainer extends React.Component {
   };
 
   render() {
-    const { movieResults, tvResults, searchTerm, loading, error } = this.state;
+    const {
+      movieResults,
+      tvResults,
+      searchTerm,
+      notFound,
+      loading,
+      error,
+    } = this.state;
     return (
       <SearchPresenter
         movieResults={movieResults}
         tvResults={tvResults}
         searchTerm={searchTerm}
+        notFound={notFound}
         loading={loading}
         error={error}
         handleSubmit={this.handleSubmit}
