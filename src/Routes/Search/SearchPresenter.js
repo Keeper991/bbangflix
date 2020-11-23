@@ -1,3 +1,4 @@
+import Poster from "Components/Poster";
 import Loader from "Components/Loader";
 import Message from "Components/Message";
 import Section from "Components/Section";
@@ -44,14 +45,30 @@ const SearchPresenter = ({
         {movieResults && movieResults.length > 0 && (
           <Section title="Movie Results">
             {movieResults.map((movie) => (
-              <span key={movie.id}>{movie.title}</span>
+              <Poster
+                key={movie.id}
+                id={movie.id}
+                imgUrl={movie.poster_path}
+                rating={movie.vote_average}
+                title={movie.original_title}
+                year={movie.release_date.substring(0, 4)}
+                isMovie={true}
+              />
             ))}
           </Section>
         )}
         {tvResults && tvResults.length > 0 && (
           <Section title="TV Show Results">
             {tvResults.map((tv) => (
-              <span key={tv.id}>{tv.name}</span>
+              <Poster
+                key={tv.id}
+                id={tv.id}
+                imgUrl={tv.poster_path}
+                rating={tv.vote_average}
+                title={tv.original_name}
+                year={tv.first_air_date.substring(0, 4)}
+                isMovie={false}
+              />
             ))}
           </Section>
         )}
